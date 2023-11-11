@@ -1,6 +1,17 @@
 let mapleader = " "
 set relativenumber
 set number
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+command! Getfulldate execute "normal! a=" . strftime("%A %-d %B %Y") . "="
+command! Gethour execute "normal! a_" . strftime("%H:%M:%S") . "_"
 
 call plug#begin()
 
@@ -71,6 +82,15 @@ ca
 
 " ----------------------------------------------------------
 lua << EOF
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+-- empty setup using defaults
+require("nvim-tree").setup()
+
 require("mason").setup()
 require('mason-lspconfig').setup()
 require'lspconfig'.pyright.setup{}
@@ -194,8 +214,9 @@ https://github.com/microsoft/pyright
 ]],
   },
 }
-
 EOF
+
+
 
 lua <<EOF
   -- Set up nvim-cmp.
@@ -274,15 +295,6 @@ EOF
 " You can revert the settings after the call like so:
 "   filetype indent off   " Disable file-type-specific indentation
 "   syntax off            " Disable syntax highlighting
-
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-set tabstop=4
-set shiftwidth=4
-set expandtab
 
 " EVERFOREST CONFIG -----------
 " Important!!
