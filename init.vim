@@ -74,14 +74,25 @@ Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'williamboman/mason.nvim'
+Plug 'prettier/vim-prettier', { 'do': 'npm install --frozen-lockfile --production' }
 
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
 call plug#end()
-ca
+
 
 " ----------------------------------------------------------
 lua << EOF
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.completion.spell,
+    },
+})
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
