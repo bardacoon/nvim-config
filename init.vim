@@ -5,6 +5,8 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+nnoremap <C-n> :NvimTreeToggle<CR>
+vnoremap = :PrettierPartial<CR>
 nnoremap gh :lua vim.diagnostic.open_float()<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -13,6 +15,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 command! Getfulldate execute "normal! a=" . strftime("%A %-d %B %Y") . "="
 command! Gethour execute "normal! a_" . strftime("%H:%M:%S") . "_"
+command! VimwikiImage execute "normal! a{{file:./images/}}<Esc>h" | startinsert
 
 call plug#begin()
 
@@ -76,6 +79,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'williamboman/mason.nvim'
 Plug 'prettier/vim-prettier', { 'do': 'npm install --frozen-lockfile --production' }
+Plug 'lewis6991/gitsigns.nvim'
 
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
@@ -84,13 +88,18 @@ call plug#end()
 
 " ----------------------------------------------------------
 lua << EOF
+require('gitsigns').setup()
+
 local null_ls = require("null-ls")
 
 null_ls.setup({
     sources = {
-        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.completion.spell,
+        null_ls.builtins.formatting.prettier,
+        -- null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.diagnostics.deno_lint,
+        null_ls.builtins.diagnostics.write_good,
+        -- null_ls.builtins.completion.spell,
+        null_ls.builtins.code_actions.gitsigns,
     },
 })
 
