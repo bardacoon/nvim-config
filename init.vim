@@ -5,90 +5,58 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-nnoremap <C-n> :NvimTreeToggle<CR>
+" nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 vnoremap = :PrettierPartial<CR>
 nnoremap gh :lua vim.diagnostic.open_float()<CR>
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>ff :Telescope find_files<CR>
+nnoremap <leader>fg :Telescope live_grep<CR>
+nnoremap <leader>fb :Telescope buffers<CR>
+nnoremap <leader>fh :Telescope help_tags<CR>
 
 command! Getfulldate execute "normal! a=" . strftime("%A %-d %B %Y") . "="
 command! Gethour execute "normal! a_" . strftime("%H:%M:%S") . "_"
 command! VimwikiImage execute "normal! a{{file:./images/}}<Esc>h" | startinsert
 
 call plug#begin()
+Plug 'vimwiki/vimwiki' " wiki
+Plug 'preservim/nerdtree' " tree
+Plug 'sainnhe/everforest' " theme
+Plug 'tpope/vim-surround' " surround
+Plug 'alvan/vim-closetag' " Closes tags
+Plug 'folke/which-key.nvim' " keymap suggestions
+Plug 'm4xshen/autoclose.nvim' " Close parenthesis and ''
+Plug 'nvim-telescope/telescope.nvim' " find files 
+Plug 'lukas-reineke/indent-blankline.nvim' " this adds the lines between divs of the same level
 
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-Plug 'junegunn/vim-easy-align'
-
-" Any valid git URL is allowed
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-
-" Multiple Plug commands can be written in a single line using | separators
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-" On-demand loading
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
-" Using a non-default branch
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go', { 'tag': '*' }
-
-" Plugin options
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
-" Unmanaged plugin (manually installed and updated)
-Plug 'L3MON4D3/LuaSnip'
-Plug 'SirVer/ultisnips'
-Plug 'dcampos/cmp-snippy'
-Plug 'dcampos/nvim-snippy'
-Plug 'folke/which-key.nvim'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'jose-elias-alvarez/null-ls.nvim'
-Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'neovim/nvim-lspconfig'
-Plug 'numToStr/Comment.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'nvim-telescope/telescope.nvim' 
-Plug 'nvim-tree/nvim-tree.lua'
-Plug 'psliwka/termcolors.nvim'
-Plug 'rafamadriz/friendly-snippets'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'sainnhe/everforest'
-Plug 'sainnhe/everforest'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-surround'
-Plug 'vimwiki/vimwiki'
-Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'williamboman/mason.nvim'
-Plug 'prettier/vim-prettier', { 'do': 'npm install --frozen-lockfile --production' }
-Plug 'lewis6991/gitsigns.nvim'
-
-" Initialize plugin system
-" - Automatically executes `filetype plugin indent on` and `syntax enable`.
+" Plug 'hrsh7th/cmp-buffer'
+" Plug 'hrsh7th/cmp-cmdline'
+" Plug 'hrsh7th/cmp-nvim-lsp'
+" Plug 'hrsh7th/cmp-path'
+" Plug 'hrsh7th/cmp-vsnip'
+" Plug 'hrsh7th/nvim-cmp'
+" Plug 'hrsh7th/vim-vsnip'
+" Plug 'jose-elias-alvarez/null-ls.nvim'
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-lualine/lualine.nvim'
+" Plug 'psliwka/termcolors.nvim'
+" Plug 'rafamadriz/friendly-snippets'
+" Plug 'saadparwaiz1/cmp_luasnip'
+" Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-rhubarb'
+" Plug 'tpope/vim-sleuth'
+" Plug 'williamboman/mason-lspconfig.nvim'
+" Plug 'williamboman/mason.nvim'
+" Plug 'prettier/vim-prettier', { 'do': 'npm install --frozen-lockfile --production' }
 call plug#end()
 
 
 " ----------------------------------------------------------
 lua << EOF
-require('gitsigns').setup()
+require('which-key').setup()
+require('autoclose').setup()
 
 local null_ls = require("null-ls")
 
@@ -99,7 +67,6 @@ null_ls.setup({
         null_ls.builtins.diagnostics.deno_lint,
         null_ls.builtins.diagnostics.write_good,
         -- null_ls.builtins.completion.spell,
-        null_ls.builtins.code_actions.gitsigns,
     },
 })
 
@@ -110,7 +77,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 -- empty setup using defaults
-require("nvim-tree").setup()
+-- require("nvim-tree").setup()
 
 require("mason").setup()
 require('mason-lspconfig').setup()
@@ -237,8 +204,6 @@ https://github.com/microsoft/pyright
 }
 EOF
 
-
-
 lua <<EOF
   -- Set up nvim-cmp.
   local cmp = require'cmp'
@@ -338,4 +303,6 @@ let g:everforest_background = 'hard'
 let g:everforest_better_performance = 1
 
 colorscheme everforest
+
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.tsx,*.js,*.ts'
 "------------------------------
