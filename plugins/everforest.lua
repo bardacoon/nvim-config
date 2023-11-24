@@ -7,7 +7,7 @@ end
 vim.opt.background = 'dark'
 
 -- Set the everforest_background and everforest_better_performance variables
-vim.g.everforest_background = 'medium' -- hard | medium | soft
+vim.g.everforest_background = 'hard' -- hard | medium | soft
 vim.g.everforest_better_performance = 1
 
 -- Set the colorscheme
