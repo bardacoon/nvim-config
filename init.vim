@@ -22,6 +22,7 @@ vnoremap = :PrettierPartial<CR>
 command! Getfulldate execute "normal! a=" . strftime("%A %-d %B %Y") . "="
 command! Gethour execute "normal! a_" . strftime("%H:%M:%S") . "_"
 command! VimwikiImage execute "normal! a{{file:./images/}}<Esc>h" | startinsert
+command! Light execute "normal! :colorscheme github_light<CR> :set background=light"
 
 call plug#begin()
 Plug 'nvim-tree/nvim-web-devicons'
@@ -51,6 +52,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'fcpg/vim-fahrenheit'
 Plug 'NeogitOrg/neogit'
+Plug 'joeveiga/ng.nvim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'projekt0n/github-nvim-theme'
+
 call plug#end()
 
 :luafile ~/.config/nvim/plugins/telescope.lua
@@ -66,6 +71,7 @@ call plug#end()
 :luafile ~/.config/nvim/plugins/vim-closetag.lua
 :luafile ~/.config/nvim/plugins/vim-closetag.lua
 :luafile ~/.config/nvim/plugins/neogit.lua
+:luafile ~/.config/nvim/plugins/ng.lua
 
-colorscheme fahrenheit
-
+colorscheme everforest
+set background=dark

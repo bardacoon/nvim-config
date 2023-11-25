@@ -72,6 +72,9 @@ local lspconfig = require('lspconfig')
 lspconfig.tsserver.setup {
   capabilities = capabilities
 }
+lspconfig.angularls.setup {
+  capabilities = capabilities
+}
 lspconfig.pyright.setup {
   capabilities = capabilities
 }
