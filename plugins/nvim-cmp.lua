@@ -18,9 +18,10 @@ cmp.setup({
     -- documentation = cmp.config.window.bordered(),
   },
   completion = { completeopt = 'menu,menuone,noinsert'},
+
   mapping = cmp.mapping.preset.insert({
-    ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-    ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
+    ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }), -- previous suggestion
+    ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }), -- next suggestion
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -51,11 +52,10 @@ cmp.setup.filetype('gitcommit', {
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'buffer' }
+    { name = 'buffer' },
   }
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
@@ -73,6 +73,9 @@ lspconfig.tsserver.setup {
   capabilities = capabilities
 }
 lspconfig.angularls.setup {
+  capabilities = capabilities
+}
+lspconfig.clangd.setup {
   capabilities = capabilities
 }
 lspconfig.pyright.setup {

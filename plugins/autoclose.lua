@@ -1,5 +1,5 @@
 require("autoclose").setup({
    options = {
-      disabled_filetypes = { "text", "markdown" },
+      disabled_filetypes = { "text", "markdown", "wiki", "vimwiki" },
    },
 })

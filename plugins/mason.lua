@@ -1,1 +1,5 @@
-require("mason").setup()
+require("mason").setup({
+   ensure_installed = {
+      "clangd"
+   }
+})
