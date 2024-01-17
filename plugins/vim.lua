@@ -4,3 +4,14 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
    update_in_insert = true, 
  }
 )
+
+-- This sets mdx files as md
+vim.filetype.add({
+	extension = {
+		mdx = "markdown.mdx",
+	},
+	filename = {},
+	pattern = {},
+})
+vim.opt.wrap = false
+vim.opt.sidescroll = 5

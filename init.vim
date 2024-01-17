@@ -9,9 +9,6 @@ set nowrap
 set ignorecase
 set smartcase
 
-const iao = "iao"
-const boh = "BOH"
-
 " For errors
 nnoremap <leader>gh :lua vim.diagnostic.setloclist()<CR>
 nnoremap gh :lua vim.diagnostic.open_float()<CR>
@@ -34,6 +31,8 @@ command! Getfulldate execute "normal! a=" . strftime("%A %-d %B %Y") . "="
 command! Gethour execute "normal! a_" . strftime("%H:%M:%S") . "_"
 command! VimwikiMedia execute "normal! a{{file:./../media/}}<Esc>h" | startinsert
 command! Light execute "normal! :colorscheme github_light<CR> :set background=light"
+command! Setup execute "normal! <C-W>n<C-W>J<C-W>k<C-W>20+<C-W>l"
+" command! Setup execute "normal! G<CR><C-W>n<C-W>J<C-W>k<C-W>20+"
 
 call plug#begin()
 " Themes
@@ -44,16 +43,20 @@ Plug 'sainnhe/everforest'
 Plug 'fcpg/vim-fahrenheit'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'projekt0n/github-nvim-theme'
+Plug 'yorickpeterse/nvim-grey'
+Plug 'rebelot/kanagawa.nvim'
 
 " Aesthetic
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'typicode/bg.nvim'
 
 " Lsp
 Plug 'williamboman/mason.nvim' | Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'joeveiga/ng.nvim'
 Plug 'wuelnerdotexe/vim-astro'
 Plug 'roobert/tailwindcss-colorizer-cmp.nvim'
+Plug 'findango/vim-mdx'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -99,6 +102,7 @@ call plug#end()
 :luafile ~/.config/nvim/plugins/ng.lua
 :luafile ~/.config/nvim/plugins/live-server.lua
 
-colorscheme everforest
+colorscheme github_dark_high_contrast
 set background=dark
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count) " This makes vim surround repeatable
+let g:user_emmet_leader_key='<C-,>'
